@@ -243,11 +243,11 @@ $veterinarios = function_exists('listarVeterinarios') ? listarVeterinarios($cone
 
             botao.addEventListener('click', function() {
 
-                document.getElementById('edit-id').value = this.dataset.data;
+                document.getElementById('edit-id').value = this.dataset.id_consulta;
 
-                document.getElementById('edit-nome').value = this.dataset.nome_tutor;
+                document.getElementById('edit-nome_tutor').value = this.dataset.nome_tutor;
 
-                document.getElementById('edit-nome_pt').value = this.dataset.nome_pet;
+                document.getElementById('edit-nome_pet').value = this.dataset.nome_pet;
 
                 document.getElementById('edit-nome_vet').value = this.dataset.nome_vet;
 
