@@ -81,11 +81,132 @@ $veterinarios = listarVeterinarios($conexao);
                     <td><?= htmlspecialchars($vet['crmv']) ?></td>
                     <td><?= htmlspecialchars($vet['especialidade']) ?></td>
                     <td><?= htmlspecialchars($vet['situacao']) ?></td>
-                    <td><a href="excluir-veterinarios.php?id_veterinario=<?= $vet['id_veterinario'] ?>">Excluir</a></td>
+                    <td><button class="btn-editar"
+                                data-id="2"
+                                data-nome="<?=htmlspecialchars($vet['nome'])?>"
+                                data-crvm="<?= htmlspecialchars($vet['crmv']) ?>"
+                                data-especialidade="<?= htmlspecialchars($vet['especialidade']) ?>"
+                                data-telefone="<?= htmlspecialchars($vet['telefone']) ?>"
+                                data-email="<?= htmlspecialchars($vet['email']) ?>"
+                                data-situacao="<?= htmlspecialchars($vet['situacao']) ?>"
+                                >Editar</button></td>
+                                 <td><a class="btn-excluir" href="excluir-tutores.php?id_tutor=<?= $vet['id_tutor'] ?>">Excluir</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+<!-- Modal de edição -->
+    <div id="modalEditar" class="modal">
+
+        <div class="modal-conteudo">
+
+            <span id="fecharModal" class="fechar">&times;</span>
+
+            <h2>Editar Tutor</h2>
+
+            <form id="formEditar">
+
+                <input type="hidden" id="edit-id">
+
+                <label>Nome</label>
+                <input type="text" id="edit-nome" required>
+
+                <label>CRVM</label>
+                <input type="text" id="edit-crvm" required>
+
+                <label>ESPECIALIDADE</label>
+                <input type="text" id="edit-especialidade">
+                
+                <label>TELEFONE</label>
+                <input type="email" id="edit-telefone">
+                
+                <label>E-MAIL</label>
+                <input type="email" id="edit-email">
+
+                <label>SITUAÇÃO</label>
+                <input type="email" id="edit-situacao">
+
+                <div class="botoes-modal">
+
+                    <button type="button" id="cancelar">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" id="salvar">
+                        Salvar alterações
+                    </button>
+                    
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+<script>
+ 
+
+        const modal = document.getElementById('modalEditar');
+
+        const botoesEditar = document.querySelectorAll('.btn-editar');
+
+        const fecharModal = document.getElementById('fecharModal');
+
+        const cancelar = document.getElementById('cancelar');
+
+        const form = document.getElementById('formEditar');
+
+
+        // Abrir modal e preencher os dados
+        botoesEditar.forEach(botao => {
+
+            botao.addEventListener('click', function() {
+
+                document.getElementById('edit-id').value = this.dataset.id;
+
+                document.getElementById('edit-nome').value = this.dataset.nome;
+
+                document.getElementById('edit-crvm').value = this.dataset.crvm;
+
+                document.getElementById('edit-especialidade').value = this.dataset.especialidade;
+
+                document.getElementById('edit-telefone').value = this.dataset.telefone;
+
+                document.getElementById('edit-email').value = this.dataset.email;
+
+                document.getElementById('edit-situacao').value = this.dataset.situacao;
+
+                modal.style.display = 'flex';
+
+            });
+
+        });
+
+
+        // Fechar modal
+        function fechar() {
+            modal.style.display = 'none';
+        }
+
+        fecharModal.addEventListener('click', fechar);
+
+        cancelar.addEventListener('click', fechar);
+
+
+        // Fechar clicando fora
+        modal.addEventListener('click', function(event) {
+
+            if (event.target === modal) {
+                fechar();
+            }
+
+        });
+
+
+
+
+ </script>
 </body>
 </html>
