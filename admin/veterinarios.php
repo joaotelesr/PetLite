@@ -90,7 +90,7 @@ $veterinarios = listarVeterinarios($conexao);
                                 data-email="<?= htmlspecialchars($vet['email']) ?>"
                                 data-situacao="<?= htmlspecialchars($vet['situacao']) ?>"
                                 >Editar</button></td>
-                                 <td><a class="btn-excluir" href="excluir-tutores.php?id_tutor=<?= $vet['id_tutor'] ?>">Excluir</a></td>
+                                 <td><a class="btn-excluir" href="excluir-veterinarios.php?id_veterinario=<?= $vet['id_veterinario'] ?>">Excluir</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -119,13 +119,13 @@ $veterinarios = listarVeterinarios($conexao);
                 <input type="text" id="edit-especialidade">
                 
                 <label>TELEFONE</label>
-                <input type="email" id="edit-telefone">
+                <input type="text" id="edit-telefone">
                 
                 <label>E-MAIL</label>
                 <input type="email" id="edit-email">
 
                 <label>SITUAÇÃO</label>
-                <input type="email" id="edit-situacao">
+                <input type="text" id="edit-situacao">
 
                 <div class="botoes-modal">
 

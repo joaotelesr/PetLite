@@ -147,10 +147,20 @@ $veterinarios = function_exists('listarVeterinarios') ? listarVeterinarios($cone
                         <tr>
                             <td><?= $c['id_consulta'] ?? $c['id'] ?? '' ?></td>
                             <td><?= ($c['data'] ?? '') . ' às ' . ($c['horario'] ?? '') ?></td>
-                            <td><?= $c['tutor_nome'] ?? $c['nome_tutor'] ?? 'N/D' ?></td>
-                            <td><?= $c['pet_nome'] ?? $c['nome_pet'] ?? 'N/D' ?></td>
-                            <td><?= $c['veterinario_nome'] ?? $c['nome_veterinario'] ?? '' ?></td>
+                            <td><?= $c['nome_tutor'] ?? $c['nome_tutor'] ?? 'N/D' ?></td>
+                            <td><?= $c['nome_pet'] ?? $c['nome_pet'] ?? 'N/D' ?></td>
+                            <td><?= $c['nome_vet'] ?? $c['nome_vet'] ?? 'N/D' ?></td>
                             <td><?= $c['status'] ?? 'Agendada' ?></td>
+                            <td><button class="btn-editar"
+                                data-id="2"
+                                data-data="<?= htmlspecialchars($c['data']) ?>"
+                                data-nome_tutor="<?= htmlspecialchars($c['nome_tutor']) ?>"
+                                data-nome_pet="<?= htmlspecialchars($c['nome_pet']) ?>"
+                                data-nome_vet="<?= htmlspecialchars($c['nome_vet']) ?>"
+                                data-status="<?= htmlspecialchars($c['status']) ?>"
+                                data-descricao="<?= htmlspecialchars($c['descricao']) ?>"
+                                data-observacoes="<?= htmlspecialchars($c['observacoes']) ?>"
+                                >Editar</button></td>
                             <td><a href="excluir-consultas.php?id_consulta=<?= $c['id_consulta'] ?>">Excluir</a></td>
                         </tr>
                     <?php endforeach; ?>
@@ -162,7 +172,121 @@ $veterinarios = function_exists('listarVeterinarios') ? listarVeterinarios($cone
             </tbody>
         </table>
     </div>
-    
+    <!-- Modal de edição -->
+    <div id="modalEditar" class="modal">
+
+        <div class="modal-conteudo">
+
+            <span id="fecharModal" class="fechar">&times;</span>
+
+            <h2>Editar Tutor</h2>
+
+            <form id="formEditar">
+
+                <input type="hidden" id="edit-id">
+
+                <label>Data</label>
+                <input type="data" id="edit-data" required>
+
+                <label>TUTOR</label>
+                <input type="text" id="edit-nome_tutor" required>
+
+                <label>PET</label>
+                <input type="text" id="edit-nome_pet">
+                
+                <label>VETERINARIO</label>
+                <input type="text" id="edit-nome_vet">
+                
+                <label>STAUTS</label>
+                <input type="text" id="edit-status">
+                
+                <label>DESCRIÇÃO</label>
+                <input type="text" id="edit-descricao">
+                
+                <label>OBSERVAÇÕES</label>
+                <input type="text" id="edit-observacoes">
+
+                <div class="botoes-modal">
+
+                    <button type="button" id="cancelar">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" id="salvar">
+                        Salvar alterações
+                    </button>
+                    
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+<script>
+ 
+
+        const modal = document.getElementById('modalEditar');
+
+        const botoesEditar = document.querySelectorAll('.btn-editar');
+
+        const fecharModal = document.getElementById('fecharModal');
+
+        const cancelar = document.getElementById('cancelar');
+
+        const form = document.getElementById('formEditar');
+
+
+        // Abrir modal e preencher os dados
+        botoesEditar.forEach(botao => {
+
+            botao.addEventListener('click', function() {
+
+                document.getElementById('edit-id').value = this.dataset.data;
+
+                document.getElementById('edit-nome').value = this.dataset.nome_tutor;
+
+                document.getElementById('edit-nome_pt').value = this.dataset.nome_pet;
+
+                document.getElementById('edit-nome_vet').value = this.dataset.nome_vet;
+
+                document.getElementById('edit-status').value = this.dataset.status;
+
+                document.getElementById('edit-descricao').value = this.dataset.descricao;
+
+                document.getElementById('edit-observacoes').value = this.dataset.observacoes;
+
+                modal.style.display = 'flex';
+
+            });
+
+        });
+
+
+        // Fechar modal
+        function fechar() {
+            modal.style.display = 'none';
+        }
+
+        fecharModal.addEventListener('click', fechar);
+
+        cancelar.addEventListener('click', fechar);
+
+
+        // Fechar clicando fora
+        modal.addEventListener('click', function(event) {
+
+            if (event.target === modal) {
+                fechar();
+            }
+
+        });
+
+
+
+
+ </script>
 
 
 
